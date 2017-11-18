@@ -1,0 +1,13 @@
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\bin\Debug\AutoReservation.BusinessLayer.dll
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\bin\Debug\AutoReservation.BusinessLayer.pdb
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\bin\Debug\AutoReservation.Dal.dll
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\bin\Debug\EntityFramework.dll
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\bin\Debug\AutoReservation.Dal.pdb
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\bin\Debug\AutoReservation.Dal.dll.config
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\bin\Debug\EntityFramework.xml
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\obj\Debug\AutoReservation.BusinessLayer.csprojResolveAssemblyReference.cache
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\obj\Debug\AutoReservation.BusinessLayer.csproj.CoreCompileInputs.cache
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\obj\Debug\AutoReservation.BusinessLayer.dll
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\obj\Debug\AutoReservation.BusinessLayer.pdb
