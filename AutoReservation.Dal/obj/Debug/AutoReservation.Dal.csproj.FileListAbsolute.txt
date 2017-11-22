@@ -8,3 +8,4 @@ C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.Dal\bin\Debug\Ent
 C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.Dal\obj\Debug\AutoReservation.Dal.csproj.CoreCompileInputs.cache
 C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.Dal\obj\Debug\AutoReservation.Dal.dll
 C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.Dal\obj\Debug\AutoReservation.Dal.pdb
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.Dal\obj\Debug\AutoReservation.Dal.csprojResolveAssemblyReference.cache

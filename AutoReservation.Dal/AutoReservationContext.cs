@@ -37,10 +37,18 @@ namespace AutoReservation.Dal
         {
             base.OnModelCreating(modelBuilder);
 
+            //modelBuilder.Entity<Auto>()
+            //    .Map
+
             // Set up hierarchical mapping in fluent API
             //      Remarks:
             //      This could not be done using attributes on business entities
             //      since the discriminator (AutoKlasse) must not be part of the entity.
         }
+
+        public DbSet<Auto> Autos { get; set; }
+        public DbSet<Kunde> Kunden { get; set; }
+        public DbSet<Reservation> Reservationen { get; set; }
+
     }
 }
