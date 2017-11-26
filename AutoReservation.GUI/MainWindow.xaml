@@ -1,0 +1,68 @@
+﻿<Window x:Class="AutoReservation.GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoReservation.GUI"
+        mc:Ignorable="d"
+        Title="MainWindow" MinHeight="380" MinWidth="565" Height="400" Width="600">
+    <Grid>
+    <TabControl Margin="10">
+        <TabItem Header="Reservationen">
+                <StackPanel Orientation="Vertical" Margin="5">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <CheckBox x:Name="showCurrentReservations" IsChecked="True" VerticalAlignment="Center" />
+                        <Label Content="nur aktuelle Reservationen anzeigen" />
+                    </StackPanel>
+                    <DataGrid x:Name="reservationsDatagrid" ItemsSource="{Binding Reservations}" MinHeight="200" Margin="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Res. Nr" Width="10*"/>
+                            <DataGridTextColumn Header="Kundenname" Width="30*" />
+                            <DataGridTextColumn Header="Kunden ID" Width="10*" />
+                            <DataGridTextColumn Header="Von" Width="10*" />
+                            <DataGridTextColumn Header="Bis" Width="10*"/>
+                            <DataGridTextColumn Header="Automarke" Width="20*" />
+                            <DataGridTextColumn Header="Auto ID" Width="10*"/>
+
+                        </DataGrid.Columns>
+                        
+                    </DataGrid>
+                    <StackPanel Orientation="Horizontal" Margin="5" Height="35">
+                        <Button x:Name="newReservationBtn" Content="Neue Reservation" Margin="5"/>
+                        <Button x:Name="deleteReservationBtn" Content="Reservation löschen" Margin="5" />
+                        <Button x:Name="editReservationBtn" Content="Reservation ändern" Margin="5" />
+                    </StackPanel>
+                </StackPanel>
+        </TabItem>
+        <TabItem Header="Stammdaten">
+                <StackPanel Orientation="Horizontal">
+                    <TabControl TabStripPlacement="Left" Margin="5">
+                        <TabItem Name="customersTab" Header="Kunden">
+                            <TabItem.Content>
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                                    <DataGrid x:Name="customerDatagrid" MinHeight="200">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Kunden ID"/>
+                                            <DataGridTextColumn Header="Vorname" />
+                                            <DataGridTextColumn Header="Nachname" />
+                                            <DataGridTextColumn Header="Geburtsdatum"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                    <StackPanel Orientation="Horizontal" Height="30" Margin="5">
+                                        <Button x:Name="addCustomerBtn" Content="Kunde hinzufügen" Margin="5"/>
+                                        <Button x:Name="deleteCustomerBtn" Content="Kunde löschen" Margin="5"/>
+                                        <Button x:Name="editCustomerBtn" Content="Kunde bearbeiten" Margin="5"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </TabItem.Content>
+                        </TabItem>
+                        <TabItem Header="Autos">
+                            
+                        </TabItem>
+                    </TabControl>
+                </StackPanel>
+        </TabItem>
+    </TabControl>
+    </Grid>
+        
+</Window>
