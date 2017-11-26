@@ -38,7 +38,10 @@ namespace AutoReservation.Dal
             base.OnModelCreating(modelBuilder);
 
             //modelBuilder.Entity<Auto>()
-            //    .Map
+            //    .Map(a => 
+            //    {
+            //        a.Properties(p=>p.AutoKlasse)
+            //    })
 
             // Set up hierarchical mapping in fluent API
             //      Remarks:

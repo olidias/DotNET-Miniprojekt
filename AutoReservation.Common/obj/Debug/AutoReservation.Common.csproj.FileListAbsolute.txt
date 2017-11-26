@@ -6,6 +6,5 @@ C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.Common\bin\Debug\
 C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.Common\bin\Debug\EntityFramework.xml
 C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.Common\bin\Debug\EntityFramework.SqlServer.xml
 C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.Common\obj\Debug\AutoReservation.Common.csprojResolveAssemblyReference.cache
-C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.Common\obj\Debug\AutoReservation.Common.csproj.CoreCompileInputs.cache
 C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.Common\obj\Debug\AutoReservation.Common.dll
 C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.Common\obj\Debug\AutoReservation.Common.pdb

@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
 namespace AutoReservation.Dal.Entities
 {
-    public class Auto
+    public abstract class Auto
     {
         [Key]
         public int Id { get; set; }
@@ -14,9 +15,11 @@ namespace AutoReservation.Dal.Entities
         public int Tagestarif { get; set; }
         [Timestamp, Required]
         public byte[] RowVersion { get; set; }
-        public int Basistarif { get; set; }
         [Required]
         public int AutoKlasse { get; set; }
+        
+        [InverseProperty("ReservationsNr")]
+        public List<Reservation> Reservationen { get; set; }
     }
  
 }
