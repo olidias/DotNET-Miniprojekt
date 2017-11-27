@@ -6,6 +6,12 @@
         xmlns:local="clr-namespace:AutoReservation.GUI"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="380" MinWidth="565" Height="400" Width="600">
+    <Window.Resources>
+        <Style x:Name="Margin5Style" TargetType="FrameworkElement">
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        
+    </Window.Resources>
     <Grid>
     <TabControl Margin="10">
         <TabItem Header="Reservationen">
@@ -35,12 +41,17 @@
                 </StackPanel>
         </TabItem>
         <TabItem Header="Stammdaten">
-                <StackPanel Orientation="Horizontal">
+                <DockPanel>
                     <TabControl TabStripPlacement="Left" Margin="5">
                         <TabItem Name="customersTab" Header="Kunden">
                             <TabItem.Content>
-                                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
-                                    <DataGrid x:Name="customerDatagrid" MinHeight="200">
+                                <DockPanel Margin="5">
+                                    <StackPanel Orientation="Horizontal" Height="35" Margin="5" DockPanel.Dock="Bottom">
+                                        <Button x:Name="addCustomerBtn" Content="Kunde hinzufügen" Margin="5"/>
+                                        <Button x:Name="deleteCustomerBtn" Content="Kunde löschen" Margin="5"/>
+                                        <Button x:Name="editCustomerBtn" Content="Kunde bearbeiten" Margin="5"/>
+                                    </StackPanel>
+                                    <DataGrid x:Name="customerDatagrid" MinHeight="200" DockPanel.Dock="Top">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="Kunden ID"/>
                                             <DataGridTextColumn Header="Vorname" />
@@ -48,19 +59,28 @@
                                             <DataGridTextColumn Header="Geburtsdatum"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
-                                    <StackPanel Orientation="Horizontal" Height="30" Margin="5">
-                                        <Button x:Name="addCustomerBtn" Content="Kunde hinzufügen" Margin="5"/>
-                                        <Button x:Name="deleteCustomerBtn" Content="Kunde löschen" Margin="5"/>
-                                        <Button x:Name="editCustomerBtn" Content="Kunde bearbeiten" Margin="5"/>
-                                    </StackPanel>
-                                </StackPanel>
+                                </DockPanel>
                             </TabItem.Content>
                         </TabItem>
                         <TabItem Header="Autos">
-                            
+                            <DockPanel Margin="5">
+                                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="35">
+                                    <Button x:Name="deleteCarBtn" Margin="5" Content="Auto löschen"/>
+                                    <Button x:Name="newCarBtn" Margin="5" Content="Auto hinzufügen"/>
+                                    <Button x:Name="editCarBtn" Margin="5" Content="Auto ändern"/>
+                                </StackPanel>
+                                <DataGrid x:Name="carsDatagrid" DockPanel.Dock="Top" MinHeight="200">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Auto ID" />
+                                        <DataGridTextColumn Header="Marke" />
+                                        <DataGridTextColumn Header="Tagestarif" />
+                                        <DataGridTextColumn Header="Basistarif" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DockPanel>
                         </TabItem>
                     </TabControl>
-                </StackPanel>
+                </DockPanel>
         </TabItem>
     </TabControl>
     </Grid>
