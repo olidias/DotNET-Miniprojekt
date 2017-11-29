@@ -6,6 +6,7 @@ using System.Data.Entity;
 
 namespace AutoReservation.Dal.Entities
 {
+    [Table("Kunde")]
     public class Kunde
     {
         [Key]
@@ -20,11 +21,10 @@ namespace AutoReservation.Dal.Entities
         [Required]
         public DateTime Geburtsdatum { get; set; }
 
-        [Timestamp, Required]
+        [Timestamp]
         public byte[] RowVersion { get; set; }
 
-        [InverseProperty("ReservationsNr")]
-        public List<Reservation> Reservationen { get; set; }
+        public ICollection<Reservation> Reservationen { get; set; }
     }
   
 }

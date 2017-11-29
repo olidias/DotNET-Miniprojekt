@@ -9,3 +9,5 @@ C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\bin
 C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\obj\Debug\AutoReservation.BusinessLayer.csprojResolveAssemblyReference.cache
 C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\obj\Debug\AutoReservation.BusinessLayer.dll
 C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\obj\Debug\AutoReservation.BusinessLayer.pdb
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\bin\Debug\AutoReservation.Dal.dll.config
+C:\hsr\MsTe\02_Uebungen\99_Miniprojekt\Vorgabe\AutoReservation.BusinessLayer\obj\Debug\AutoReservation.BusinessLayer.csproj.CoreCompileInputs.cache

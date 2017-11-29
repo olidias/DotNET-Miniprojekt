@@ -1,5 +1,6 @@
 ﻿using AutoReservation.Dal.Entities;
 using AutoReservation.Dal.Migrations;
+using System;
 using System.Data.Entity;
 
 namespace AutoReservation.Dal
@@ -36,12 +37,23 @@ namespace AutoReservation.Dal
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            var now = DateTime.Now;
 
             //modelBuilder.Entity<Auto>()
-            //    .Map(a => 
-            //    {
-            //        a.Properties(p=>p.AutoKlasse)
-            //    })
+            //    .Map(a => a.Requires("RowVersion").HasValue(now));
+            //modelBuilder.Entity<Kunde>()
+            //    .Map(a => a.Requires("RowVersion").HasValue(now));
+            //modelBuilder.Entity<Reservation>()
+            //    .Map(a => a.Requires("RowVersion").HasValue(now));
+
+            modelBuilder.Entity<LuxusklasseAuto>()
+                .Map(a => a.Requires("AutoKlasse").HasValue(0));
+
+            modelBuilder.Entity<MittelklasseAuto>()
+                .Map(a => a.Requires("AutoKlasse").HasValue(1));
+
+            modelBuilder.Entity<StandardAuto>()
+                .Map(a => a.Requires("AutoKlasse").HasValue(2));
 
             // Set up hierarchical mapping in fluent API
             //      Remarks:
