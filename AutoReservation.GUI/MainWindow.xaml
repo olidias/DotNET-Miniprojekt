@@ -22,13 +22,13 @@
                     </StackPanel>
                     <DataGrid x:Name="reservationsDatagrid" ItemsSource="{Binding Reservations}" MinHeight="200" Margin="5">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Res. Nr" Width="10*"/>
-                            <DataGridTextColumn Header="Kundenname" Width="30*" />
-                            <DataGridTextColumn Header="Kunden ID" Width="10*" />
-                            <DataGridTextColumn Header="Von" Width="10*" />
-                            <DataGridTextColumn Header="Bis" Width="10*"/>
-                            <DataGridTextColumn Header="Automarke" Width="20*" />
-                            <DataGridTextColumn Header="Auto ID" Width="10*"/>
+                            <DataGridTextColumn Header="Res. Nr" Width="1*" Binding="{Binding ReservationsNr}"/>
+                            <DataGridTextColumn Header="Kundenname" Width="3*" />
+                            <DataGridTextColumn Header="Kunden ID" Width="1*" />
+                            <DataGridTextColumn Header="Von" Width="1*" />
+                            <DataGridTextColumn Header="Bis" Width="1*"/>
+                            <DataGridTextColumn Header="Automarke" Width="2*" />
+                            <DataGridTextColumn Header="Auto ID" Width="1*"/>
 
                         </DataGrid.Columns>
                         

@@ -16,7 +16,7 @@ namespace AutoReservation.Dal.Entities
         public virtual Auto Auto { get; set; }
         [Required]
         public int KundeId { get; set; }
-        public Kunde Kunde { get; set; }
+        public virtual Kunde Kunde { get; set; }
         [Required]
         public DateTime Von { get; set; }
         [Required]

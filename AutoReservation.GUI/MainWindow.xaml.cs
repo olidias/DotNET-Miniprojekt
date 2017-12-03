@@ -12,6 +12,9 @@ namespace AutoReservation.GUI
         public MainWindow()
         {
             InitializeComponent();
+            Reservations = new List<Reservation>();
+            Reservations.Add(new Reservation { ReservationsNr = 12 });
+            reservationsDatagrid.DataContext = this;
         }
     }
 

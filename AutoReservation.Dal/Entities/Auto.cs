@@ -15,7 +15,6 @@ namespace AutoReservation.Dal.Entities
         public int Tagestarif { get; set; }
         [Timestamp]
         public byte[] RowVersion { get; set; }
-        
-        public ICollection<Reservation> Reservationen { get; set; }
+        public virtual ICollection<Reservation> Reservationen { get; set; }
     }
 }

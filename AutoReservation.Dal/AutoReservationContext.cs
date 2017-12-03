@@ -37,14 +37,9 @@ namespace AutoReservation.Dal
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            var now = DateTime.Now;
 
-            //modelBuilder.Entity<Auto>()
-            //    .Map(a => a.Requires("RowVersion").HasValue(now));
-            //modelBuilder.Entity<Kunde>()
-            //    .Map(a => a.Requires("RowVersion").HasValue(now));
-            //modelBuilder.Entity<Reservation>()
-            //    .Map(a => a.Requires("RowVersion").HasValue(now));
+            modelBuilder.Entity<Auto>()
+                .HasMany(p => p.Reservationen);
 
             modelBuilder.Entity<LuxusklasseAuto>()
                 .Map(a => a.Requires("AutoKlasse").HasValue(0));
