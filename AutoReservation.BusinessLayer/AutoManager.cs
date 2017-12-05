@@ -66,10 +66,7 @@ namespace AutoReservation.BusinessLayer
                     context.SaveChanges();
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
         }
 
