@@ -15,6 +15,7 @@ namespace AutoReservation.GUI
             Reservations = new List<Reservation>();
             Reservations.Add(new Reservation { ReservationsNr = 12 });
             reservationsDatagrid.DataContext = this;
+            reservationListView.DataContext = this;
         }
     }
 

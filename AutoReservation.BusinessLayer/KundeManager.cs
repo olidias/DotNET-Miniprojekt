@@ -75,9 +75,12 @@ namespace AutoReservation.BusinessLayer
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
-                var dbo = context.Kunden.Remove(target);
+                var dbo = (from k in context.Kunden
+                           where k.Id == target.Id
+                           select k).FirstOrDefault();
                 if (dbo != null)
                 {
+                    context.Kunden.Remove(dbo);
                     context.SaveChanges();
                     return true;
                 }
