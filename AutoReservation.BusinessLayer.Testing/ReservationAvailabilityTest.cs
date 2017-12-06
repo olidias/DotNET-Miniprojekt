@@ -19,33 +19,62 @@ namespace AutoReservation.BusinessLayer.Testing
         }
 
         [TestMethod]
-        public void ScenarioOkay01Test()
+        public void ScenarioSameCarSameCustomerDifferentTimes()
         {
-            Assert.Inconclusive("Test not implemented.");
+            var resCountBefore = Target.GetAllReservationen().Count;
+            var res1 = new Reservation() { ReservationsNr = 255, AutoId = 1, KundeId =1, Von = DateTime.Now.Date, Bis = DateTime.Now.AddDays(5).Date};
+            var res2 = new Reservation() { ReservationsNr = 256, AutoId = 1, KundeId = 1, Von = DateTime.Now.Date.AddDays(-5).Date, Bis = DateTime.Now.Date};
+
+            Target.InsertReservation(res1);
+            Target.InsertReservation(res2);
+
+            Assert.AreEqual(resCountBefore + 2, Target.GetAllReservationen().Count);
         }
 
         [TestMethod]
-        public void ScenarioOkay02Test()
+        public void ScenarioDifferentCarsDifferentCustomerSameTime()
         {
-            Assert.Inconclusive("Test not implemented.");
-        }
-        
-        [TestMethod]
-        public void ScenarioNotOkay01Test()
-        {
-            Assert.Inconclusive("Test not implemented.");
+            var resCountBefore = Target.GetAllReservationen().Count;
+            var res1 = new Reservation() { ReservationsNr = 255, AutoId = 1, KundeId = 1, Von = DateTime.Now.Date, Bis = DateTime.Now.AddDays(5).Date };
+            var res2 = new Reservation() { ReservationsNr = 256, AutoId = 2, KundeId = 2, Von = DateTime.Now.Date, Bis = DateTime.Now.AddDays(5).Date };
+
+            Target.InsertReservation(res1);
+            Target.InsertReservation(res2);
+
+            Assert.AreEqual(resCountBefore + 2, Target.GetAllReservationen().Count);
         }
 
         [TestMethod]
-        public void ScenarioNotOkay02Test()
+        [ExpectedException(typeof(Exceptions.OverlappingTimesException))]
+        public void ScenarioSameCustomerSameTime()
         {
-            Assert.Inconclusive("Test not implemented.");
+            var res1 = new Reservation() { ReservationsNr = 255, AutoId = 1, KundeId = 1, Von = DateTime.Now.Date.AddDays(-2), Bis = DateTime.Now.AddDays(1).Date };
+            var res2 = new Reservation() { ReservationsNr = 256, AutoId = 2, KundeId = 1, Von = DateTime.Now.Date, Bis = DateTime.Now.AddDays(5).Date };
+
+            Target.InsertReservation(res1);
+            Target.InsertReservation(res2);
         }
 
         [TestMethod]
-        public void ScenarioNotOkay03Test()
+        [ExpectedException(typeof(Exceptions.OverlappingTimesException))]
+        public void ScenarioDifferentCustomerSameCarSameTime()
         {
-            Assert.Inconclusive("Test not implemented.");
+            var res1 = new Reservation() { ReservationsNr = 255, AutoId = 1, KundeId = 1, Von = DateTime.Now.Date.AddDays(-2), Bis = DateTime.Now.AddDays(1).Date };
+            var res2 = new Reservation() { ReservationsNr = 256, AutoId = 1, KundeId = 2, Von = DateTime.Now.Date, Bis = DateTime.Now.AddDays(5).Date };
+
+            Target.InsertReservation(res1);
+            Target.InsertReservation(res2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exceptions.OverlappingTimesException))]
+        public void ScenarioDifferentCustomerSameCarInnerTimes()
+        {
+            var res1 = new Reservation() { ReservationsNr = 255, AutoId = 1, KundeId = 1, Von = DateTime.Now.Date.AddDays(-2), Bis = DateTime.Now.AddDays(6).Date };
+            var res2 = new Reservation() { ReservationsNr = 256, AutoId = 1, KundeId = 2, Von = DateTime.Now.Date, Bis = DateTime.Now.AddDays(5).Date };
+
+            Target.InsertReservation(res1);
+            Target.InsertReservation(res2);
         }
     }
 }

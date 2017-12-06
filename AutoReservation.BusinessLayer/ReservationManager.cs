@@ -33,6 +33,7 @@ namespace AutoReservation.BusinessLayer
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
+                CheckAvailability(context, res);
                 try
                 {
                     context.Reservationen.Add(res);
@@ -55,6 +56,8 @@ namespace AutoReservation.BusinessLayer
                            where r.ReservationsNr == res.ReservationsNr
                            select r).FirstOrDefault();
 
+                CheckAvailability(context, res);
+
                 if (dbo != null)
                 {
                     dbo.Kunde = res.Kunde;
@@ -69,6 +72,48 @@ namespace AutoReservation.BusinessLayer
                 return false;
             }
         }
+
+        private void CheckAvailability(AutoReservationContext context, Reservation res)
+        {
+            var conflictCandidates = (from r in context.Reservationen
+                                      where r.AutoId == res.AutoId || r.KundeId == res.KundeId
+                                      select r)
+                                      .AsNoTracking()
+                                      .ToList();
+
+            foreach(Reservation dbRes in conflictCandidates)
+            {
+                if (IsCompletelyOverlapping(res, dbRes) || IsCompletelyOverlapping(dbRes,res))
+                {
+                    throw new Exceptions.OverlappingTimesException()
+                    {
+                        AutoId = res.AutoId,
+                        KundenId = res.KundeId,
+                        OverallpingState = Exceptions.OverlappingState.CompleteOverlap
+                    };
+                }
+                else if(IsPartlyOverlapping(res, dbRes) || IsPartlyOverlapping(dbRes, res))
+                {
+                    throw new Exceptions.OverlappingTimesException()
+                    {
+                        AutoId = res.AutoId,
+                        KundenId = res.KundeId,
+                        OverallpingState = Exceptions.OverlappingState.PartialOverlap
+                    };
+                }
+            }
+        }
+
+        private bool IsPartlyOverlapping(Reservation res1, Reservation res2)
+        {
+            return res1.Von < res2.Von && (res1.Bis > res2.Von && res1.Bis < res2.Bis);
+        }
+
+        private bool IsCompletelyOverlapping(Reservation res1, Reservation res2)
+        {
+            return res2.Von < res1.Von && res2.Bis > res1.Bis;
+        }
+
         public bool RemoveReservation(Reservation res)
         {
             using (AutoReservationContext context = new AutoReservationContext())
