@@ -31,14 +31,16 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public bool InsertReservation(Reservation res)
+        public bool InsertReservation(Reservation target)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
-                CheckAvailability(context, res);
+                CheckAvailability(context, target);
+                CheckRange(target);
+
                 try
                 {
-                    context.Reservationen.Add(res);
+                    context.Reservationen.Add(target);
                     context.SaveChanges();
                     return true;
                 }
@@ -59,6 +61,7 @@ namespace AutoReservation.BusinessLayer
                            select r).FirstOrDefault();
 
                 CheckAvailability(context, target);
+                CheckRange(target);
 
                 if (dbo != null)
                 {
@@ -76,6 +79,14 @@ namespace AutoReservation.BusinessLayer
                     return true;
                 }
                 return false;
+            }
+        }
+
+        private void CheckRange(Reservation target)
+        {
+            if(target.Bis <= target.Von)
+            {
+                throw new InvalidDateRangeException();
             }
         }
 
