@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using AutoReservation.Dal.Entities;
+using System.Collections;
+using AutoReservation.BusinessLayer.Exceptions;
 
 namespace AutoReservation.BusinessLayer
 {
@@ -57,6 +59,10 @@ namespace AutoReservation.BusinessLayer
                            select k).FirstOrDefault();
                 if (dbo != null)
                 {
+                    if (StructuralComparisons.StructuralComparer.Compare(dbo.RowVersion, target.RowVersion) > 0)
+                    {
+                        throw CreateOptimisticConcurrencyException(context, target);
+                    }
                     dbo.Geburtsdatum = target.Geburtsdatum;
                     dbo.Nachname = target.Nachname;
                     dbo.Vorname = target.Vorname;

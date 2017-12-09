@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using AutoReservation.Dal.Entities;
+using AutoReservation.BusinessLayer.Exceptions;
+using System.Collections;
 
 namespace AutoReservation.BusinessLayer
 {
@@ -56,6 +58,10 @@ namespace AutoReservation.BusinessLayer
                            select a).FirstOrDefault();
                 if (dbo != null)
                 {
+                    if (StructuralComparisons.StructuralComparer.Compare(dbo.RowVersion, target.RowVersion) > 0)
+                    {
+                        throw CreateOptimisticConcurrencyException(context, target);
+                    }
                     dbo.Marke = target.Marke;
                     dbo.Reservationen = target.Reservationen;
                     dbo.Tagestarif = target.Tagestarif;

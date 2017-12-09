@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using AutoReservation.Dal.Entities;
 using AutoReservation.BusinessLayer.Exceptions;
+using System.Collections;
 
 namespace AutoReservation.BusinessLayer
 {
@@ -49,24 +50,28 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public bool UpdateReservation(Reservation res)
+        public bool UpdateReservation(Reservation target)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
                 var dbo = (from r in context.Reservationen
-                           where r.ReservationsNr == res.ReservationsNr
+                           where r.ReservationsNr == target.ReservationsNr
                            select r).FirstOrDefault();
 
-                CheckAvailability(context, res);
+                CheckAvailability(context, target);
 
                 if (dbo != null)
                 {
-                    dbo.Kunde = res.Kunde;
-                    dbo.KundeId = res.KundeId;
-                    dbo.Von = res.Von;
-                    dbo.Bis = res.Bis;
-                    dbo.Auto = res.Auto;
-                    dbo.AutoId = res.AutoId;
+                    if (StructuralComparisons.StructuralComparer.Compare(dbo.RowVersion, target.RowVersion)>0)
+                    {
+                        throw CreateOptimisticConcurrencyException(context, target);
+                    }
+                    dbo.Kunde = target.Kunde;
+                    dbo.KundeId = target.KundeId;
+                    dbo.Von = target.Von;
+                    dbo.Bis = target.Bis;
+                    dbo.Auto = target.Auto;
+                    dbo.AutoId = target.AutoId;
                     context.SaveChanges();
                     return true;
                 }
