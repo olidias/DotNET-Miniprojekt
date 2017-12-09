@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using AutoReservation.Dal.Entities;
+using AutoReservation.BusinessLayer.Exceptions;
 
 namespace AutoReservation.BusinessLayer
 {
@@ -76,42 +77,26 @@ namespace AutoReservation.BusinessLayer
         private void CheckAvailability(AutoReservationContext context, Reservation res)
         {
             var conflictCandidates = (from r in context.Reservationen
-                                      where r.AutoId == res.AutoId || r.KundeId == res.KundeId
+                                      where r.AutoId == res.AutoId
+                                      where r.ReservationsNr != res.ReservationsNr
                                       select r)
-                                      .AsNoTracking()
-                                      .ToList();
+                                      .AsNoTracking();
 
             foreach(Reservation dbRes in conflictCandidates)
             {
-                if (IsCompletelyOverlapping(res, dbRes) || IsCompletelyOverlapping(dbRes,res))
+                if(CheckIntersection(dbRes, res))
                 {
-                    throw new Exceptions.OverlappingTimesException()
+                    throw new OverlappingTimesException()
                     {
-                        AutoId = res.AutoId,
-                        KundenId = res.KundeId,
-                        OverallpingState = Exceptions.OverlappingState.CompleteOverlap
-                    };
-                }
-                else if(IsPartlyOverlapping(res, dbRes) || IsPartlyOverlapping(dbRes, res))
-                {
-                    throw new Exceptions.OverlappingTimesException()
-                    {
-                        AutoId = res.AutoId,
-                        KundenId = res.KundeId,
-                        OverallpingState = Exceptions.OverlappingState.PartialOverlap
+                        AutoId = dbRes.AutoId,
+                        ReservationsNr = dbRes.ReservationsNr
                     };
                 }
             }
         }
-
-        private bool IsPartlyOverlapping(Reservation res1, Reservation res2)
+        private bool CheckIntersection(Reservation res1, Reservation res2)
         {
-            return res1.Von < res2.Von && (res1.Bis > res2.Von && res1.Bis < res2.Bis);
-        }
-
-        private bool IsCompletelyOverlapping(Reservation res1, Reservation res2)
-        {
-            return res2.Von < res1.Von && res2.Bis > res1.Bis;
+            return !(res1.Von >= res2.Bis || res2.Bis <= res1.Von);
         }
 
         public bool RemoveReservation(Reservation res)

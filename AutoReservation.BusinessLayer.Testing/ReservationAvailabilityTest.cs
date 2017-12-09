@@ -19,11 +19,11 @@ namespace AutoReservation.BusinessLayer.Testing
         }
 
         [TestMethod]
-        public void ScenarioSameCarSameCustomerDifferentTimes()
+        public void ScenarioDifferentCarSameCustomerSameTime()
         {
             var resCountBefore = Target.GetAllReservationen().Count;
             var res1 = new Reservation() { ReservationsNr = 255, AutoId = 1, KundeId =1, Von = DateTime.Now.Date, Bis = DateTime.Now.AddDays(5).Date};
-            var res2 = new Reservation() { ReservationsNr = 256, AutoId = 1, KundeId = 1, Von = DateTime.Now.Date.AddDays(-5).Date, Bis = DateTime.Now.Date};
+            var res2 = new Reservation() { ReservationsNr = 256, AutoId = 2, KundeId = 1, Von = DateTime.Now.Date, Bis = DateTime.Now.Date.AddDays(5).Date};
 
             Target.InsertReservation(res1);
             Target.InsertReservation(res2);
