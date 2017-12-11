@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AutoReservation.GUI.Views;
+using Prism.Regions;
 using System.Windows;
 
 namespace AutoReservation.GUI
@@ -8,19 +9,12 @@ namespace AutoReservation.GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<Reservation> Reservations { get; set; }
-        public MainWindow()
+        public MainWindow(IRegionManager regionManager)
         {
             InitializeComponent();
-            Reservations = new List<Reservation>();
-            Reservations.Add(new Reservation { ReservationsNr = 12 });
-            reservationsDatagrid.DataContext = this;
-            reservationListView.DataContext = this;
+
+            regionManager.RegisterViewWithRegion("ContentRegion", typeof(ReservationsUebersicht));
         }
     }
 
-    public class Reservation
-    {
-        public int ReservationsNr { get; set; }
-    }
 }

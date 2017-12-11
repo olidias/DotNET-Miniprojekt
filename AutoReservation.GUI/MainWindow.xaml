@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:AutoReservation.GUI"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="380" MinWidth="565" Height="400" Width="600">
@@ -13,83 +15,7 @@
         
     </Window.Resources>
     <Grid>
-    <TabControl Margin="10">
-        <TabItem Header="Reservationen">
-                <StackPanel Orientation="Vertical" Margin="5">
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <CheckBox x:Name="showCurrentReservations" IsChecked="True" VerticalAlignment="Center" />
-                        <Label Content="nur aktuelle Reservationen anzeigen" />
-                    </StackPanel>
-                    <DataGrid x:Name="reservationsDatagrid" ItemsSource="{Binding Reservations}" MinHeight="150" Margin="5">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Res. Nr" Width="1*" Binding="{Binding ReservationsNr}"/>
-                            <DataGridTextColumn Header="Kundenname" Width="3*" />
-                            <DataGridTextColumn Header="Kunden ID" Width="1*" />
-                            <DataGridTextColumn Header="Von" Width="1*" />
-                            <DataGridTextColumn Header="Bis" Width="1*"/>
-                            <DataGridTextColumn Header="Automarke" Width="2*" />
-                            <DataGridTextColumn Header="Auto ID" Width="1*"/>
-
-                        </DataGrid.Columns>
-                        
-                    </DataGrid>
-                    <ListView x:Name="reservationListView" ItemsSource="{Binding Reservations}" Height="100" >
-                        <ListView.View>
-                            <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Reservationsinfos">
-                                <GridViewColumn Header="Res. Nr" DisplayMemberBinding="{Binding ReservationsNr}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                        <StackPanel Orientation="Horizontal" Margin="5" Height="35">
-                        <Button x:Name="newReservationBtn" Content="Neue Reservation" Margin="5"/>
-                        <Button x:Name="deleteReservationBtn" Content="Reservation löschen" Margin="5" />
-                        <Button x:Name="editReservationBtn" Content="Reservation ändern" Margin="5" />
-                    </StackPanel>
-                </StackPanel>
-        </TabItem>
-        <TabItem Header="Stammdaten">
-                <DockPanel>
-                    <TabControl TabStripPlacement="Left" Margin="5">
-                        <TabItem Name="customersTab" Header="Kunden">
-                            <TabItem.Content>
-                                <DockPanel Margin="5">
-                                    <StackPanel Orientation="Horizontal" Height="35" Margin="5" DockPanel.Dock="Bottom">
-                                        <Button x:Name="addCustomerBtn" Content="Kunde hinzufügen" Margin="5"/>
-                                        <Button x:Name="deleteCustomerBtn" Content="Kunde löschen" Margin="5"/>
-                                        <Button x:Name="editCustomerBtn" Content    ="Kunde bearbeiten" Margin="5"/>
-                                    </StackPanel>
-                                    <DataGrid x:Name="customerDatagrid" MinHeight="200" DockPanel.Dock="Top">
-                                        <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Kunden ID"/>
-                                            <DataGridTextColumn Header="Vorname" />
-                                            <DataGridTextColumn Header="Nachname" />
-                                            <DataGridTextColumn Header="Geburtsdatum"/>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </DockPanel>
-                            </TabItem.Content>
-                        </TabItem>
-                        <TabItem Header="Autos">
-                            <DockPanel Margin="5">
-                                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="35">
-                                    <Button x:Name="deleteCarBtn" Margin="5" Content="Auto löschen"/>
-                                    <Button x:Name="newCarBtn" Margin="5" Content="Auto hinzufügen"/>
-                                    <Button x:Name="editCarBtn" Margin="5" Content="Auto ändern"/>
-                                </StackPanel>
-                                <DataGrid x:Name="carsDatagrid" DockPanel.Dock="Top" MinHeight="200">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Auto ID" />
-                                        <DataGridTextColumn Header="Marke" />
-                                        <DataGridTextColumn Header="Tagestarif" />
-                                        <DataGridTextColumn Header="Basistarif" />
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </DockPanel>
-                        </TabItem>
-                    </TabControl>
-                </DockPanel>
-        </TabItem>
-    </TabControl>
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
     </Grid>
         
 </Window>
