@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="AutoReservation.GUI.Views.ReservationenUebersicht"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AutoReservation.GUI.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DockPanel Margin="5">
+            <StackPanel Orientation="Horizontal" Margin="5" DockPanel.Dock="Top">
+                <CheckBox x:Name="showCurrentReservations" IsChecked="True" VerticalAlignment="Center" />
+                <Label Content="nur aktuelle Reservationen anzeigen" />
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal" Margin="5" Height="35" DockPanel.Dock="Bottom">
+                <Button x:Name="newReservationBtn" Content="Neue Reservation" Margin="5" Command="{Binding NewReservationCommand}"/>
+                <Button x:Name="deleteReservationBtn" Content="Reservation löschen" Margin="5" />
+                <Button x:Name="editReservationBtn" Content="Reservation ändern" Margin="5" />
+            </StackPanel>
+            <ListView x:Name="reservationListView" ItemsSource="{Binding Reservations}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Reservationsinfos">
+                        <GridViewColumn Header="Res. Nr" DisplayMemberBinding="{Binding ReservationsNr}" />
+                        <GridViewColumn Header="Kundenname" DisplayMemberBinding="{Binding KundenName}" />
+                        <GridViewColumn Header="Kunden ID" DisplayMemberBinding="{Binding KundenId}"  />
+                        <GridViewColumn Header="Von" DisplayMemberBinding="{Binding Von,StringFormat='dd.MM.yyyy hh:mm'}" />
+                        <GridViewColumn Header="Bis" DisplayMemberBinding="{Binding Bis,StringFormat='dd.MM.yyyy hh:mm'}"  />
+                        <GridViewColumn Header="Automarke" DisplayMemberBinding="{Binding Automarke}"  />
+                        <GridViewColumn Header="AutoId" DisplayMemberBinding="{Binding AutoId}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+
+    </Grid>
+</UserControl>

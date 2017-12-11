@@ -13,7 +13,7 @@ namespace AutoReservation.GUI
         {
             InitializeComponent();
 
-            regionManager.RegisterViewWithRegion("ContentRegion", typeof(ReservationsUebersicht));
+            regionManager.RegisterViewWithRegion("ContentRegion", typeof(MainContent));
         }
     }
 

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace AutoReservation.GUI.Views
 {
     /// <summary>
-    /// Interaction logic for ReservationsUebersicht.xaml
+    /// Interaction logic for Stammdaten.xaml
     /// </summary>
-    public partial class ReservationsUebersicht : UserControl
+    public partial class Stammdaten : UserControl
     {
-        public ReservationsUebersicht()
+        public Stammdaten()
         {
             InitializeComponent();
         }

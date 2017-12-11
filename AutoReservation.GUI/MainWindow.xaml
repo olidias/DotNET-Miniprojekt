@@ -4,16 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:prism="http://prismlibrary.com/"
+        Icon="Assets/favicon.png"
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:AutoReservation.GUI"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="380" MinWidth="565" Height="400" Width="600">
-    <Window.Resources>
-        <Style x:Name="Margin5Style" TargetType="FrameworkElement">
-            <Setter Property="Margin" Value="5" />
-        </Style>
-        
-    </Window.Resources>
+        Title="Auto Reservation v1.0" MinHeight="380" MinWidth="565" Height="400" Width="600">
     <Grid>
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
     </Grid>
