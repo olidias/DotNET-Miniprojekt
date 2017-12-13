@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace AutoReservation.Common.DataTransferObjects
 {
+    [DataContract]
     public class AutoDto
     {
         public int Id { get; set; }

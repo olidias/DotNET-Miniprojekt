@@ -76,12 +76,12 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public bool RemoveAuto(Auto target)
+        public bool RemoveAuto(int autoId)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
                 var dbo = (from a in context.Autos
-                           where a.Id == target.Id
+                           where a.Id == autoId
                            select a).FirstOrDefault();
                 if (dbo != null) {
                     context.Autos.Remove(dbo);

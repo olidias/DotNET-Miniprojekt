@@ -26,19 +26,22 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void GetAutosTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            var autos = Target.GetAllAutos();
+            Assert.AreEqual(3, autos.Count);
         }
 
         [TestMethod]
         public void GetKundenTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            var kunden = Target.GetAllKunden();
+            Assert.AreEqual(4, kunden.Count);
         }
 
         [TestMethod]
         public void GetReservationenTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            var res = Target.GetAllReservations();
+            Assert.AreEqual(3, res.Count);
         }
 
         #endregion

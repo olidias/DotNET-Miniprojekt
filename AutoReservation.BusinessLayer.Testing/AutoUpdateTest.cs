@@ -52,7 +52,7 @@ namespace AutoReservation.BusinessLayer.Testing
         {
             var totalAutosBefore = Target.GetAllAutos();
             var auto = totalAutosBefore.Find(k => k.Id == 1);
-            Target.RemoveAuto(auto);
+            Target.RemoveAuto(auto.Id);
             var totalAutosAfter = Target.GetAllAutos();
 
             Assert.AreEqual(totalAutosBefore.Count - 1, totalAutosAfter.Count);

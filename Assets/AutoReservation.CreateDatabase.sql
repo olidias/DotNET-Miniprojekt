@@ -1,4 +1,5 @@
-﻿PRINT N'Creating Tables';
+﻿service
+PRINT N'Creating Tables';
 PRINT N'-------------------';
 PRINT N'';
 

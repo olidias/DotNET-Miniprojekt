@@ -39,6 +39,8 @@ namespace AutoReservation.Common.Interfaces
         void UpdateAuto(AutoDto auto);
         [OperationContract]
         void DeleteAuto(int autoId);
+        [OperationContract]
+        bool IsAutoAvailable(AutoDto auto);
 
 
     }
