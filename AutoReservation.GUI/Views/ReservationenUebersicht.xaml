@@ -18,10 +18,10 @@
 
             <StackPanel Orientation="Horizontal" Margin="5" Height="35" DockPanel.Dock="Bottom">
                 <Button x:Name="newReservationBtn" Content="Neue Reservation" Margin="5" Command="{Binding NewReservationCommand}"/>
-                <Button x:Name="deleteReservationBtn" Content="Reservation löschen" Margin="5" />
-                <Button x:Name="editReservationBtn" Content="Reservation ändern" Margin="5" />
+                <Button x:Name="deleteReservationBtn" Content="Reservation löschen" Margin="5" Command="{Binding DeleteReservationCommand}"/>
+                <Button x:Name="editReservationBtn" Content="Reservation ändern" Margin="5" Visibility="Collapsed"/>
             </StackPanel>
-            <ListView x:Name="reservationListView" ItemsSource="{Binding Reservations}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">
+            <ListView x:Name="reservationListView" ItemsSource="{Binding Reservations}" SelectedItem="{Binding SelectedReservation}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">
                 <ListView.View>
                     <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Reservationsinfos">
                         <GridViewColumn Header="Res. Nr" DisplayMemberBinding="{Binding ReservationsNr}" />

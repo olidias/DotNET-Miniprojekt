@@ -10,6 +10,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace AutoReservation.GUI.ViewModels
@@ -17,10 +19,17 @@ namespace AutoReservation.GUI.ViewModels
     public class ReservationenUebersichtViewModel
     {
         public ObservableCollection<ReservationDto> Reservations { get; set; }
+        public ReservationDto SelectedReservation { get; set; }
+
         private IEventAggregator eventAggregator;
 
         ICommand newReservationCommand;
         public ICommand NewReservationCommand { get => newReservationCommand ?? (newReservationCommand = new RelayCommand(() => this.NewReservationDialog())); }
+
+        private ICommand deleteReservationCommand;
+        public ICommand DeleteReservationCommand { get => deleteReservationCommand ?? (deleteReservationCommand = new RelayCommand(() => this.DeleteReservation())); }
+
+
         public ObservableCollection<KundeDto> Kunden { get; private set; }
         public ObservableCollection<AutoDto> Autos { get; private set; }
 
@@ -51,6 +60,17 @@ namespace AutoReservation.GUI.ViewModels
             resWindow.ShowView();
         }
 
+        private void DeleteReservation()
+        {
+            if (this.SelectedReservation == null)
+                return;
+            DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Wollen Sie den ausgewählten Eintrag wirklich löschen?", "Eintrag Löschen?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.Reservations.Remove(this.SelectedReservation);
+            }
+
+        }
         private void ResWindow_NewReservationCompleteEvent(ReservationDto reservation)
         {
             var resNr = this.Reservations.Max(r=>r.ReservationsNr)+1;
