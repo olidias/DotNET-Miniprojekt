@@ -7,14 +7,19 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" MinWidth="450" MinHeight="300">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="120" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <DockPanel>
             <TabControl TabStripPlacement="Left" Margin="5">
                 <TabItem Name="customersTab" Header="Kunden">
                     <TabItem.Content>
                         <DockPanel Margin="5">
-                            <StackPanel Orientation="Horizontal" Height="35" Margin="5" DockPanel.Dock="Bottom">
+                            <StackPanel Orientation="Horizontal" Height="35" DockPanel.Dock="Bottom">
                                 <Button x:Name="addCustomerBtn" Content="Kunde hinzufügen" Margin="5" Command="{Binding AddKundeCommand}"/>
                                 <Button x:Name="deleteCustomerBtn" Content="Kunde löschen" Margin="5" Command="{Binding DeleteKundeCommand}"/>
                                 <Button x:Name="editCustomerBtn" Content="Kunde bearbeiten" Margin="5" Visibility="Collapsed"/>
@@ -22,10 +27,10 @@
                             <ListView x:Name="reservationListView" ItemsSource="{Binding KundenCollection}" SelectedItem="{Binding SelectedKunde}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">
                                 <ListView.View>
                                     <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Reservationsinfos">
-                                        <GridViewColumn Header="Kunden ID" DisplayMemberBinding="{Binding Id}" />
-                                        <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Vorname}" />
-                                        <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Nachname}"  />
-                                        <GridViewColumn Header="Geburtsdatum" DisplayMemberBinding="{Binding Geburtsdatum,StringFormat='dd.MM.yyyy'}"  />
+                                        <GridViewColumn Header="Kunden ID" DisplayMemberBinding="{Binding Id}" Width="60" />
+                                        <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Vorname}" Width="80" />
+                                        <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Nachname}"  Width="80"/>
+                                        <GridViewColumn Header="Geburtsdatum" DisplayMemberBinding="{Binding Geburtsdatum,StringFormat='dd.MM.yyyy'}"  Width="90"/>
                                     </GridView>
                                 </ListView.View>
                             </ListView>
@@ -42,10 +47,10 @@
                         <ListView x:Name="carsListView" ItemsSource="{Binding AutoCollection}" SelectedItem="{Binding SelectedAuto}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">
                             <ListView.View>
                                 <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Reservationsinfos">
-                                    <GridViewColumn Header="Auto ID" DisplayMemberBinding="{Binding Id}" />
-                                    <GridViewColumn Header="Marke" DisplayMemberBinding="{Binding Marke}" />
-                                    <GridViewColumn Header="Tagestarif" DisplayMemberBinding="{Binding Tagestarif}"  />
-                                    <GridViewColumn Header="Basistarif" DisplayMemberBinding="{Binding Basistarif}" />
+                                    <GridViewColumn Header="Auto ID" DisplayMemberBinding="{Binding Id}" Width="50"/>
+                                    <GridViewColumn Header="Marke" DisplayMemberBinding="{Binding Marke}" Width="80"/>
+                                    <GridViewColumn Header="Tagestarif" DisplayMemberBinding="{Binding Tagestarif}" Width="80" />
+                                    <GridViewColumn Header="Basistarif" DisplayMemberBinding="{Binding Basistarif}" Width="80"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>

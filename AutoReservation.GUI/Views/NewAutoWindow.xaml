@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:AutoReservation.GUI.Views"
         xmlns:autoRes="clr-namespace:AutoReservation.Common.DataTransferObjects;assembly=AutoReservation.Common"
         mc:Ignorable="d"
-        Title="Neues Auto hinzufügen" Height="350" Width="300">
+        Title="Neues Auto hinzufügen" Height="350" Width="300" MaxHeight="400" MaxWidth="450" MinHeight="300" MinWidth="300">
     <Window.Resources>
         <ObjectDataProvider MethodName="GetValues" 
                             ObjectType="{x:Type sys:Enum}"

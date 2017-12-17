@@ -63,7 +63,7 @@ namespace AutoReservation.GUI.ViewModels
             }
             var res = e.Item as ReservationDto;
 
-            if (res.Von <= DateTime.Now.Date && res.Bis >= DateTime.Now)
+            if (res.Von.Date <= DateTime.Now.Date && res.Bis.Date >= DateTime.Now.Date)
             {
                 e.Accepted = true;
             }

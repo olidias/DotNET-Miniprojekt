@@ -17,6 +17,11 @@
 
 
             <StackPanel Orientation="Horizontal" Margin="5" Height="35" DockPanel.Dock="Bottom">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Width" Value="120" />
+                    </Style>
+                </StackPanel.Resources>
                 <Button x:Name="newReservationBtn" Content="Neue Reservation" Margin="5" Command="{Binding NewReservationCommand}"/>
                 <Button x:Name="deleteReservationBtn" Content="Reservation löschen" Margin="5" Command="{Binding DeleteReservationCommand}"/>
                 <Button x:Name="editReservationBtn" Content="Reservation ändern" Margin="5" Visibility="Collapsed"/>
@@ -27,8 +32,8 @@
                         <GridViewColumn Header="Res. Nr" DisplayMemberBinding="{Binding ReservationsNr}" />
                         <GridViewColumn Header="Kundenname" DisplayMemberBinding="{Binding Kunde.Nachname}" />
                         <GridViewColumn Header="Kunden ID" DisplayMemberBinding="{Binding Kunde.Id}"  />
-                        <GridViewColumn Header="Von" DisplayMemberBinding="{Binding Von,StringFormat='dd.MM.yyyy hh:mm'}" />
-                        <GridViewColumn Header="Bis" DisplayMemberBinding="{Binding Bis,StringFormat='dd.MM.yyyy hh:mm'}"  />
+                        <GridViewColumn Header="Von" DisplayMemberBinding="{Binding Von,StringFormat='dd.MM.yyyy'}" />
+                        <GridViewColumn Header="Bis" DisplayMemberBinding="{Binding Bis,StringFormat='dd.MM.yyyy'}"  />
                         <GridViewColumn Header="Automarke" DisplayMemberBinding="{Binding Auto.Marke}"  />
                         <GridViewColumn Header="AutoId" DisplayMemberBinding="{Binding Auto.Id}" />
                     </GridView>
