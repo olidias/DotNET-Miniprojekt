@@ -103,9 +103,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="DisplayClasses\AutoDisplay.cs" />
-    <Compile Include="DisplayClasses\KundeDisplay.cs" />
-    <Compile Include="DisplayClasses\ReservationDisplay.cs" />
     <Compile Include="EventAggregatorEvents\AutoDataChangedEvent.cs" />
     <Compile Include="EventAggregatorEvents\KundenDataChangedEvent.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
