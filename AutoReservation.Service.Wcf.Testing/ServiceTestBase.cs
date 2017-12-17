@@ -51,19 +51,30 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void GetAutoByIdTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            var auto = Target.GetAuto(2);
+            Assert.AreEqual("VW Golf", auto.Marke);
+            Assert.AreEqual(120, auto.Tagestarif);
+            Assert.AreEqual(AutoKlasse.Mittelklasse, auto.AutoKlasse);
+
         }
 
         [TestMethod]
         public void GetKundeByIdTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            var kunde = Target.GetKunde(4);
+            Assert.AreEqual("Rainer", kunde.Vorname);
+            Assert.AreEqual("Zufall", kunde.Nachname);
+            Assert.AreEqual(new DateTime(1954, 11, 11).Date, kunde.Geburtsdatum.Date);
         }
 
         [TestMethod]
         public void GetReservationByNrTest()
         {
-            Assert.Inconclusive("Test not implemented.");
+            var res = Target.GetReservation(3);
+            Assert.AreEqual(3, res.Kunde.Id);
+            Assert.AreEqual(3, res.Auto.Id);
+            Assert.AreEqual(new DateTime(2020, 01, 10).Date, res.Von.Date);
+            Assert.AreEqual(new DateTime(2020, 01, 20).Date, res.Bis.Date);
         }
 
         #endregion

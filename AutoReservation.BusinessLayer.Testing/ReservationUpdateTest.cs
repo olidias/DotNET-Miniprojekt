@@ -21,10 +21,10 @@ namespace AutoReservation.BusinessLayer.Testing
         [TestMethod]
         public void UpdateReservationTest()
         {
-            var res = Target.GetReservation(1);
+            Reservation res = Target.GetReservation(1);
             var oldBis = res.Bis;
 
-            res.Bis = oldBis.AddDays(2);
+            res.Bis = oldBis.AddDays(2).Date;
             Target.UpdateReservation(res);
             Assert.AreEqual(oldBis.AddDays(2), Target.GetReservation(1).Bis);
         }

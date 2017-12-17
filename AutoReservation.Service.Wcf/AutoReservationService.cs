@@ -113,17 +113,55 @@ namespace AutoReservation.Service.Wcf
 
         public AutoDto GetAuto(int autoId)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            try
+            {
+                return autoManager.GetAuto(autoId).ConvertToDto();
+            }catch(Exception ex)
+            {
+                var e = new EntityOperationFault()
+                {
+                    ErrorInputType = typeof(AutoDto),
+                    ErrorOperation = ErrorOperation.Read
+                };
+                throw new FaultException<EntityOperationFault>(e, new FaultReason(ex.Message));
+            }
         }
 
         public KundeDto GetKunde(int kundenId)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            try
+            {
+                return kundeManager.GetKunde(kundenId).ConvertToDto();
+            }
+            catch (Exception ex)
+            {
+                var e = new EntityOperationFault()
+                {
+                    ErrorInputType = typeof(KundeDto),
+                    ErrorOperation = ErrorOperation.Read
+                };
+                throw new FaultException<EntityOperationFault>(e, new FaultReason(ex.Message));
+            }
         }
 
         public ReservationDto GetReservation(int reservationsNr)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            try
+            {
+                return reservationManager.GetReservation(reservationsNr).ConvertToDto();
+            }
+            catch(Exception ex)
+            {
+                var e = new EntityOperationFault()
+                {
+                    ErrorInputType = typeof(ReservationDto),
+                    ErrorOperation = ErrorOperation.Read
+                };
+                throw new FaultException<EntityOperationFault>(e, new FaultReason(ex.Message));
+            }
         }
 
         public void InsertAuto(AutoDto auto)

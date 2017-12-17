@@ -1,7 +1,12 @@
-﻿using AutoReservation.GUI.Commands;
+﻿using AutoReservation.Common.DataTransferObjects;
+using AutoReservation.GUI.Commands;
+using AutoReservation.GUI.DisplayClasses;
+using AutoReservation.GUI.EventAggregatorEvents;
 using AutoReservation.GUI.Views;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,41 +16,62 @@ namespace AutoReservation.GUI.ViewModels
 {
     public class ReservationenUebersichtViewModel
     {
-        public List<Reservation> Reservations { get; set; }
-        
-        public ReservationenUebersichtViewModel()
+        public ObservableCollection<ReservationDto> Reservations { get; set; }
+        ICommand newReservationCommand;
+        private IEventAggregator eventAggregator;
+
+        public ICommand NewReservationCommand { get => newReservationCommand ?? (newReservationCommand = new RelayCommand(() => this.NewReservationDialog())); }
+        public ObservableCollection<KundeDto> Kunden { get; private set; }
+        public ObservableCollection<AutoDto> Autos { get; private set; }
+
+        public ReservationenUebersichtViewModel(IEventAggregator eventAggregator)
         {
-            Reservations = new List<Reservation>
-            {
-                new Reservation { ReservationsNr = 12 },
-                new Reservation { ReservationsNr = 13 },
-                new Reservation { ReservationsNr = 14 }
-            };
+            this.eventAggregator = eventAggregator;
+
+            this.eventAggregator.GetEvent<KundenDataChangedEvent>().Subscribe(this.KundenChanged);
+            this.eventAggregator.GetEvent<AutoDataChangedEvent>().Subscribe(this.AutosChanged);
+            InitTestData();
+
         }
 
-        ICommand newReservationCommand;
-        public ICommand NewReservationCommand { get => newReservationCommand ?? (newReservationCommand = new RelayCommand(() => this.NewReservation())); }
-
-        private void NewReservation()
+        private void AutosChanged(ObservableCollection<AutoDto> newAutoCollection)
         {
-            new NewReservationWindow().ShowDialog();
+            this.Autos = newAutoCollection;
+        }
+
+        private void KundenChanged(ObservableCollection<KundeDto> newKundenCollection)
+        {
+            this.Kunden = newKundenCollection;
+        }
+
+        private void NewReservationDialog()
+        {
+            var resWindow = new NewReservationWindowViewModel(this.Kunden, this.Autos);
+            resWindow.NewReservationCompleteEvent += ResWindow_NewReservationCompleteEvent;
+            resWindow.ShowView();
+        }
+
+        private void ResWindow_NewReservationCompleteEvent(ReservationDto reservation)
+        {
+            var resNr = this.Reservations.Max(r=>r.ReservationsNr)+1;
+            reservation.ReservationsNr = resNr;
+
+            this.Reservations.Add(reservation);
+        }
+
+        private void InitTestData()
+        {
+            var kunde1 = new KundeDto() { Nachname = "Hustler", Vorname = "Heiri" };
+            var kunde2 = new KundeDto() { Nachname = "Holter", Vorname = "Honty" };
+            var kunde3 = new KundeDto() { Nachname = "High", Vorname = "Helfy" };
+            Reservations = new ObservableCollection<ReservationDto>
+            {
+                new ReservationDisplay { ReservationsNr = 12, Kunde=kunde1, Auto = new AutoDto(){Marke="Aston Martin" },Von=DateTime.Now.Date,Bis=DateTime.Now.AddDays(3).Date },
+                new ReservationDisplay { ReservationsNr = 13, Kunde=kunde2, Auto = new AutoDto(){Marke="Fiat Punto" },Von=DateTime.Now.Date,Bis=DateTime.Now.AddDays(4).Date },
+                new ReservationDisplay { ReservationsNr = 14, Kunde=kunde3, Auto = new AutoDto(){Marke="Maserati" },Von=DateTime.Now.AddDays(-5),Bis=DateTime.Now.AddDays(3).Date },
+            };
         }
     }
 
-}
-public class Reservation
-{
-    private int kundenId;
-    private string kundenName;
-    private string automarke;
-    private string autoId;
-
-    public int ReservationsNr { get; set; }
-    public string KundenName { get => "Petri Heil"; set => kundenName = value; }
-    public int KundenId { get => 12; set => kundenId = value; }
-    public DateTime Von { get => DateTime.Now.Date; }
-    public DateTime Bis { get => DateTime.Now.AddDays(3).Date; }
-    public string Automarke { get => "Aston Martin"; set => automarke = value; }
-    public string AutoId { get => "101"; set => autoId = value; }
-
+  
 }

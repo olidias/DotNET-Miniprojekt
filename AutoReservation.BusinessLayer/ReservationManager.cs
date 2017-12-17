@@ -25,9 +25,13 @@ namespace AutoReservation.BusinessLayer
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
-                return (from r in context.Reservationen
+                var res = (from r in context.Reservationen
                            where r.ReservationsNr == reservationsNr
-                           select r).FirstOrDefault();
+                           select r)
+                           .Include(r=>r.Auto)
+                           .Include(r=>r.Kunde)
+                           .FirstOrDefault();
+                return (Reservation)res;
             }
         }
 

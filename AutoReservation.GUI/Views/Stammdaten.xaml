@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AutoReservation.GUI.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -17,14 +19,16 @@
                                 <Button x:Name="deleteCustomerBtn" Content="Kunde löschen" Margin="5"/>
                                 <Button x:Name="editCustomerBtn" Content    ="Kunde bearbeiten" Margin="5"/>
                             </StackPanel>
-                            <DataGrid x:Name="customerDatagrid" MinHeight="200" DockPanel.Dock="Top">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Kunden ID"/>
-                                    <DataGridTextColumn Header="Vorname" />
-                                    <DataGridTextColumn Header="Nachname" />
-                                    <DataGridTextColumn Header="Geburtsdatum"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                            <ListView x:Name="reservationListView" ItemsSource="{Binding KundenCollection}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">
+                                <ListView.View>
+                                    <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Reservationsinfos">
+                                        <GridViewColumn Header="Kunden ID" DisplayMemberBinding="{Binding Id}" />
+                                        <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Vorname}" />
+                                        <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Nachname}"  />
+                                        <GridViewColumn Header="Geburtsdatum" DisplayMemberBinding="{Binding Bis,StringFormat='dd.MM.yyyy hh:mm'}"  />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
                         </DockPanel>
                     </TabItem.Content>
                 </TabItem>
@@ -35,14 +39,16 @@
                             <Button x:Name="newCarBtn" Margin="5" Content="Auto hinzufügen"/>
                             <Button x:Name="editCarBtn" Margin="5" Content="Auto ändern"/>
                         </StackPanel>
-                        <DataGrid x:Name="carsDatagrid" DockPanel.Dock="Top" MinHeight="200">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Auto ID" />
-                                <DataGridTextColumn Header="Marke" />
-                                <DataGridTextColumn Header="Tagestarif" />
-                                <DataGridTextColumn Header="Basistarif" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <ListView x:Name="carsListView" ItemsSource="{Binding AutoCollection}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Reservationsinfos">
+                                    <GridViewColumn Header="Auto ID" DisplayMemberBinding="{Binding Id}" />
+                                    <GridViewColumn Header="Marke" DisplayMemberBinding="{Binding Marke}" />
+                                    <GridViewColumn Header="Tagestarif" DisplayMemberBinding="{Binding Tagestarif}"  />
+                                    <GridViewColumn Header="Basistarif" DisplayMemberBinding="{Binding Basistarif}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
                     </DockPanel>
                 </TabItem>
             </TabControl>

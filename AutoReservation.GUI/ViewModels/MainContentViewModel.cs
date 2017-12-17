@@ -10,6 +10,5 @@ namespace AutoReservation.GUI.ViewModels
 {
     class MainContentViewModel
     {
-
     }
 }

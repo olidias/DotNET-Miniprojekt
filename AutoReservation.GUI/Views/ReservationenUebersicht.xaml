@@ -25,12 +25,12 @@
                 <ListView.View>
                     <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Reservationsinfos">
                         <GridViewColumn Header="Res. Nr" DisplayMemberBinding="{Binding ReservationsNr}" />
-                        <GridViewColumn Header="Kundenname" DisplayMemberBinding="{Binding KundenName}" />
-                        <GridViewColumn Header="Kunden ID" DisplayMemberBinding="{Binding KundenId}"  />
+                        <GridViewColumn Header="Kundenname" DisplayMemberBinding="{Binding Kundenname}" />
+                        <GridViewColumn Header="Kunden ID" DisplayMemberBinding="{Binding Kunde.KundenId}"  />
                         <GridViewColumn Header="Von" DisplayMemberBinding="{Binding Von,StringFormat='dd.MM.yyyy hh:mm'}" />
                         <GridViewColumn Header="Bis" DisplayMemberBinding="{Binding Bis,StringFormat='dd.MM.yyyy hh:mm'}"  />
-                        <GridViewColumn Header="Automarke" DisplayMemberBinding="{Binding Automarke}"  />
-                        <GridViewColumn Header="AutoId" DisplayMemberBinding="{Binding AutoId}" />
+                        <GridViewColumn Header="Automarke" DisplayMemberBinding="{Binding Auto.Marke}"  />
+                        <GridViewColumn Header="AutoId" DisplayMemberBinding="{Binding Auto.Id}" />
                     </GridView>
                 </ListView.View>
             </ListView>
