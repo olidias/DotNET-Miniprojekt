@@ -1,16 +1,10 @@
 ﻿using AutoReservation.Common.DataTransferObjects;
 using AutoReservation.GUI.Commands;
-using AutoReservation.GUI.DisplayClasses;
 using AutoReservation.GUI.EventAggregatorEvents;
-using AutoReservation.GUI.Views;
 using Prism.Events;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -64,7 +58,7 @@ namespace AutoReservation.GUI.ViewModels
         {
             if (this.SelectedReservation == null)
                 return;
-            DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Wollen Sie den ausgewählten Eintrag wirklich löschen?", "Eintrag Löschen?", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Wollen Sie den ausgewählten Eintrag wirklich löschen?", "Eintrag Löschen?", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 this.Reservations.Remove(this.SelectedReservation);

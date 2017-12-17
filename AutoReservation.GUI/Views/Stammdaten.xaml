@@ -17,9 +17,9 @@
                             <StackPanel Orientation="Horizontal" Height="35" Margin="5" DockPanel.Dock="Bottom">
                                 <Button x:Name="addCustomerBtn" Content="Kunde hinzufügen" Margin="5" Command="{Binding AddKundeCommand}"/>
                                 <Button x:Name="deleteCustomerBtn" Content="Kunde löschen" Margin="5" Command="{Binding DeleteKundeCommand}"/>
-                                <Button x:Name="editCustomerBtn" Content    ="Kunde bearbeiten" Margin="5"/>
+                                <Button x:Name="editCustomerBtn" Content="Kunde bearbeiten" Margin="5" Visibility="Collapsed"/>
                             </StackPanel>
-                            <ListView x:Name="reservationListView" ItemsSource="{Binding KundenCollection}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">
+                            <ListView x:Name="reservationListView" ItemsSource="{Binding KundenCollection}" SelectedItem="{Binding SelectedKunde}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">
                                 <ListView.View>
                                     <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Reservationsinfos">
                                         <GridViewColumn Header="Kunden ID" DisplayMemberBinding="{Binding Id}" />
@@ -36,10 +36,10 @@
                     <DockPanel Margin="5">
                         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="35">
                             <Button x:Name="newCarBtn" Margin="5" Content="Auto hinzufügen" Command="{Binding AddAutoCommand}"/>
-                            <Button x:Name="deleteCarBtn" Margin="5" Content="Auto löschen"/>
-                            <Button x:Name="editCarBtn" Margin="5" Content="Auto ändern"/>
+                            <Button x:Name="deleteCarBtn" Margin="5" Content="Auto löschen" Command="{Binding DeleteAutoCommand}"/>
+                            <Button x:Name="editCarBtn" Margin="5" Content="Auto ändern" Visibility="Collapsed"/>
                         </StackPanel>
-                        <ListView x:Name="carsListView" ItemsSource="{Binding AutoCollection}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">
+                        <ListView x:Name="carsListView" ItemsSource="{Binding AutoCollection}" SelectedItem="{Binding SelectedAuto}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">
                             <ListView.View>
                                 <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Reservationsinfos">
                                     <GridViewColumn Header="Auto ID" DisplayMemberBinding="{Binding Id}" />

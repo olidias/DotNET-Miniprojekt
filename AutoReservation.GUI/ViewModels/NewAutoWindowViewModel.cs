@@ -18,7 +18,7 @@ namespace AutoReservation.GUI.ViewModels
         private ICommand addAutoCommand;
         private NewAutoWindow view;
 
-        public ICommand AddAutoCommand { get => this.addAutoCommand ?? (addAutoCommand = new RelayCommand(() => this.AddAutoComplete())); }
+        public ICommand AddAutoCommand { get => this.addAutoCommand ?? (addAutoCommand = new RelayCommand(() => this.CommitNewAuto())); }
 
 
         public AutoDto Auto { get; }
@@ -32,7 +32,7 @@ namespace AutoReservation.GUI.ViewModels
                 Id = newId
             };
         }
-        private void AddAutoComplete()
+        private void CommitNewAuto()
         {
             NewAutoCompleteEvent(this.Auto);
             this.view.Close();

@@ -15,9 +15,9 @@ namespace AutoReservation.GUI.ViewModels
         public delegate void NewKundeComplete(KundeDto newKunde);
         public event NewKundeComplete NewKundeCompleteEvent;
         private ICommand addKundeCommand;
-        public ICommand AddKundeCommand { get => addKundeCommand ?? (addKundeCommand = new RelayCommand(() => this.AddKundeComplete())); }
+        public ICommand AddKundeCommand { get => addKundeCommand ?? (addKundeCommand = new RelayCommand(() => this.CommitNewKunde())); }
 
-        private void AddKundeComplete()
+        private void CommitNewKunde()
         {
             NewKundeCompleteEvent(this.Kunde);
             this.view.Close();

@@ -30,7 +30,7 @@ namespace AutoReservation.GUI.ViewModels
         public DateTime Bis { get =>bis;set { bis = value; } }
         private ICommand reserveCommand;
 
-        public ICommand ReserveCommand { get => reserveCommand ?? (reserveCommand = new RelayCommand(() => this.ReserveComplete())); }
+        public ICommand ReserveCommand { get => reserveCommand ?? (reserveCommand = new RelayCommand(() => this.CommitNewReservation())); }
 
         private NewReservationWindow view;
 
@@ -40,9 +40,7 @@ namespace AutoReservation.GUI.ViewModels
             this.AutoCollection = autos;
         }
 
-       
-
-        private void ReserveComplete()
+        private void CommitNewReservation()
         {
             NewReservationCompleteEvent(new ReservationDto()
             {

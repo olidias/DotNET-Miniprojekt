@@ -2,14 +2,10 @@
 using AutoReservation.GUI.Commands;
 using AutoReservation.GUI.EventAggregatorEvents;
 using Prism.Events;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
-using static AutoReservation.GUI.ViewModels.NewAutoWindowViewModel;
 
 namespace AutoReservation.GUI.ViewModels
 {
@@ -27,6 +23,7 @@ namespace AutoReservation.GUI.ViewModels
                 }
             }
         }
+        public KundeDto SelectedKunde { get; set; }
         private ObservableCollection<AutoDto> autoCollection;
         public ObservableCollection<AutoDto> AutoCollection
         {
@@ -41,13 +38,18 @@ namespace AutoReservation.GUI.ViewModels
             }
 
         }
+        public AutoDto SelectedAuto { get; set; }
         private ICommand addKundeCommand;
         public ICommand AddKundeCommand { get=> addKundeCommand ?? (addKundeCommand = new RelayCommand(() => this.NewKunde())); }
+        private ICommand deleteKundeCommand;
+        public ICommand DeleteKundeCommand { get => deleteKundeCommand ?? (deleteKundeCommand = new RelayCommand(() => this.DeleteKunde()));}
 
         private ICommand addAutoCommand;
         public ICommand AddAutoCommand { get => addAutoCommand ?? (addAutoCommand = new RelayCommand(() => this.NewAuto())); }
+        private ICommand deleteAutoCommand;
+        public ICommand DeleteAutoCommand { get => deleteAutoCommand ?? (deleteAutoCommand = new RelayCommand(() => this.DeleteAuto())); }
 
- 
+
         private IEventAggregator eventAggregator;
 
         public StammdatenViewModel(IEventAggregator eventAggregator)
@@ -65,6 +67,15 @@ namespace AutoReservation.GUI.ViewModels
             newKundeWindow.NewKundeCompleteEvent += NewKundeComplete;
             newKundeWindow.ShowView();
         }
+        private void DeleteKunde()
+        {
+            if (this.SelectedKunde == null) return;
+            DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Wollen Sie den ausgewählten Eintrag wirklich löschen?", "Eintrag Löschen?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.KundenCollection.Remove(this.SelectedKunde);
+            }
+        }
         private void NewAuto()
         {
             int newId = 0;
@@ -73,9 +84,18 @@ namespace AutoReservation.GUI.ViewModels
             var newAutoWindow = new NewAutoWindowViewModel(newId);
             newAutoWindow.NewAutoCompleteEvent += NewAutoComplete;
             newAutoWindow.ShowView();
-
         }
 
+        private void DeleteAuto()
+        {
+            if (SelectedAuto == null)
+                return;
+            DialogResult dialogResult = MessageBox.Show("Wollen Sie den ausgewählten Eintrag wirklich löschen?", "Eintrag Löschen?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.AutoCollection.Remove(this.SelectedAuto);
+            }
+        }
         private void NewAutoComplete(AutoDto newAuto)
         {
             this.autoCollection.Add(newAuto);
