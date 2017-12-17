@@ -24,9 +24,9 @@ namespace AutoReservation.GUI.ViewModels
         public AutoDto Auto { get; set; }
         public ObservableCollection<AutoDto> AutoCollection{get;set;}
 
-        private DateTime von = DateTime.Now;
+        private DateTime von;
         public DateTime Von { get => von; set => von = value; }
-        private DateTime bis = DateTime.Now.AddDays(2);
+        private DateTime bis;
         public DateTime Bis { get =>bis;set { bis = value; } }
         private ICommand reserveCommand;
 
@@ -36,6 +36,8 @@ namespace AutoReservation.GUI.ViewModels
 
         public NewReservationWindowViewModel(ObservableCollection<KundeDto> kunden, ObservableCollection<AutoDto> autos)
         {
+            this.von = DateTime.Now;
+            this.bis = DateTime.Now.AddDays(2);
             this.KundenCollection = kunden;
             this.AutoCollection = autos;
         }

@@ -11,7 +11,7 @@
     <Grid>
         <DockPanel Margin="5">
             <StackPanel Orientation="Horizontal" Margin="5" DockPanel.Dock="Top">
-                <CheckBox x:Name="showCurrentReservations" IsChecked="True" VerticalAlignment="Center" />
+                <CheckBox x:Name="showCurrentReservations" IsChecked="{Binding ShowOnlyCurrentReservations}" VerticalAlignment="Center" />
                 <Label Content="nur aktuelle Reservationen anzeigen" />
             </StackPanel>
 
