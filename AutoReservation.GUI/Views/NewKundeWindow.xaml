@@ -1,0 +1,38 @@
+﻿<Window x:Class="AutoReservation.GUI.Views.NewKundeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoReservation.GUI.Views"
+        mc:Ignorable="d"
+        Title="NewKundeWindow" Height="300" Width="300">
+    <Grid>
+        <Grid Margin="40">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Content="ID:" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
+            <TextBox IsEnabled="False" Text="{Binding Kunde.Id}" Grid.Column="1" Grid.Row="0"    Margin="0 8" />
+
+            <Label Content="Vorname:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" />
+            <TextBox Text="{Binding Kunde.Vorname}" Grid.Column="1" Grid.Row="1" Margin="0 8"/>
+
+            <Label Content="Nachname:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" />
+            <TextBox Text="{Binding Kunde.Nachname}" Grid.Column="1" Grid.Row="2" Margin="0 8"/>
+
+            <Label Content="Geburtsdatum:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" />
+            <DatePicker Grid.Column="1" Text="{Binding Kunde.Geburtsdatum}" Grid.Row="3" VerticalAlignment="Center"/>
+
+            <Button Command="{Binding AddKundeCommand}" Grid.ColumnSpan="2" Content="Kunde hinzufügen" Grid.Row="4"  Margin="20 15 20 0"/>
+        </Grid>
+
+    </Grid>
+</Window>

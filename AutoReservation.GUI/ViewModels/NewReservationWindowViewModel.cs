@@ -18,11 +18,11 @@ namespace AutoReservation.GUI.ViewModels
         public delegate void NewReservationComplete(ReservationDto reservation);
         public event NewReservationComplete NewReservationCompleteEvent;
 
-        public KundeDisplay Kunde { get; set; }
-        public ObservableCollection<KundeDisplay> KundenCollection { get; set; }
+        public KundeDto Kunde { get; set; }
+        public ObservableCollection<KundeDto> KundenCollection { get; set; }
 
         public AutoDisplay Auto { get; set; }
-        public ObservableCollection<AutoDisplay> AutoCollection{get;set;}
+        public ObservableCollection<AutoDto> AutoCollection{get;set;}
 
         private DateTime von = DateTime.Now;
         public DateTime Von { get => von; set => von = value; }
@@ -37,20 +37,11 @@ namespace AutoReservation.GUI.ViewModels
 
         public NewReservationWindowViewModel(ObservableCollection<KundeDto> kunden, ObservableCollection<AutoDto> autos)
         {
-            this.KundenCollection = ConvertToDisplayClasses<KundeDto, KundeDisplay>(kunden);
-            this.AutoCollection = ConvertToDisplayClasses<AutoDto, AutoDisplay>(autos);
+            this.KundenCollection = kunden;
+            this.AutoCollection = autos;
         }
 
-        private ObservableCollection<U> ConvertToDisplayClasses<T, U>(ObservableCollection<T> kunden) where U : T, new() 
-        {
-            var coll = new ObservableCollection<U>();
-            foreach(T item in kunden)
-            {
-                var u = new U();
-                coll.Add((U)item);
-            }
-            return coll;
-        }
+       
 
         private void ReserveComplete()
         {

@@ -15,8 +15,8 @@
                     <TabItem.Content>
                         <DockPanel Margin="5">
                             <StackPanel Orientation="Horizontal" Height="35" Margin="5" DockPanel.Dock="Bottom">
-                                <Button x:Name="addCustomerBtn" Content="Kunde hinzufügen" Margin="5"/>
-                                <Button x:Name="deleteCustomerBtn" Content="Kunde löschen" Margin="5"/>
+                                <Button x:Name="addCustomerBtn" Content="Kunde hinzufügen" Margin="5" Command="{Binding AddKundeCommand}"/>
+                                <Button x:Name="deleteCustomerBtn" Content="Kunde löschen" Margin="5" Command="{Binding DeleteKundeCommand}"/>
                                 <Button x:Name="editCustomerBtn" Content    ="Kunde bearbeiten" Margin="5"/>
                             </StackPanel>
                             <ListView x:Name="reservationListView" ItemsSource="{Binding KundenCollection}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">
@@ -25,7 +25,7 @@
                                         <GridViewColumn Header="Kunden ID" DisplayMemberBinding="{Binding Id}" />
                                         <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Vorname}" />
                                         <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Nachname}"  />
-                                        <GridViewColumn Header="Geburtsdatum" DisplayMemberBinding="{Binding Bis,StringFormat='dd.MM.yyyy hh:mm'}"  />
+                                        <GridViewColumn Header="Geburtsdatum" DisplayMemberBinding="{Binding Geburtsdatum,StringFormat='dd.MM.yyyy'}"  />
                                     </GridView>
                                 </ListView.View>
                             </ListView>

@@ -25,8 +25,8 @@
                 <ListView.View>
                     <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Reservationsinfos">
                         <GridViewColumn Header="Res. Nr" DisplayMemberBinding="{Binding ReservationsNr}" />
-                        <GridViewColumn Header="Kundenname" DisplayMemberBinding="{Binding Kundenname}" />
-                        <GridViewColumn Header="Kunden ID" DisplayMemberBinding="{Binding Kunde.KundenId}"  />
+                        <GridViewColumn Header="Kundenname" DisplayMemberBinding="{Binding Kunde.Nachname}" />
+                        <GridViewColumn Header="Kunden ID" DisplayMemberBinding="{Binding Kunde.Id}"  />
                         <GridViewColumn Header="Von" DisplayMemberBinding="{Binding Von,StringFormat='dd.MM.yyyy hh:mm'}" />
                         <GridViewColumn Header="Bis" DisplayMemberBinding="{Binding Bis,StringFormat='dd.MM.yyyy hh:mm'}"  />
                         <GridViewColumn Header="Automarke" DisplayMemberBinding="{Binding Auto.Marke}"  />
