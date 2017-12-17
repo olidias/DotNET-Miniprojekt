@@ -109,11 +109,15 @@
     <Compile Include="EventAggregatorEvents\AutoDataChangedEvent.cs" />
     <Compile Include="EventAggregatorEvents\KundenDataChangedEvent.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
+    <Compile Include="ViewModels\NewAutoWindowViewModel.cs" />
     <Compile Include="ViewModels\NewKundeWindowViewModel.cs" />
     <Compile Include="ViewModels\NewReservationWindowViewModel.cs" />
     <Compile Include="ViewModels\StammdatenViewModel.cs" />
     <Compile Include="Views\MainContent.xaml.cs">
       <DependentUpon>MainContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewAutoWindow.xaml.cs">
+      <DependentUpon>NewAutoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewKundeWindow.xaml.cs">
       <DependentUpon>NewKundeWindow.xaml</DependentUpon>
@@ -141,6 +145,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\MainContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewAutoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

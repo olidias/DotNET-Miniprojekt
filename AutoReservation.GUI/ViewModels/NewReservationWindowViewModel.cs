@@ -21,7 +21,7 @@ namespace AutoReservation.GUI.ViewModels
         public KundeDto Kunde { get; set; }
         public ObservableCollection<KundeDto> KundenCollection { get; set; }
 
-        public AutoDisplay Auto { get; set; }
+        public AutoDto Auto { get; set; }
         public ObservableCollection<AutoDto> AutoCollection{get;set;}
 
         private DateTime von = DateTime.Now;
@@ -31,7 +31,6 @@ namespace AutoReservation.GUI.ViewModels
         private ICommand reserveCommand;
 
         public ICommand ReserveCommand { get => reserveCommand ?? (reserveCommand = new RelayCommand(() => this.ReserveComplete())); }
-
 
         private NewReservationWindow view;
 

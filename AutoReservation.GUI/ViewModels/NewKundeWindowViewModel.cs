@@ -25,7 +25,7 @@ namespace AutoReservation.GUI.ViewModels
 
         public NewKundeWindowViewModel(int newId)
         {
-            this.Kunde = new KundeDto() { Id = newId };
+            this.Kunde = new KundeDto() { Id = newId, Geburtsdatum=DateTime.Now};
         }
 
         public void ShowView()

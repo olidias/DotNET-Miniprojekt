@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static AutoReservation.GUI.ViewModels.NewAutoWindowViewModel;
 
 namespace AutoReservation.GUI.ViewModels
 {
@@ -43,6 +44,10 @@ namespace AutoReservation.GUI.ViewModels
         private ICommand addKundeCommand;
         public ICommand AddKundeCommand { get=> addKundeCommand ?? (addKundeCommand = new RelayCommand(() => this.NewKunde())); }
 
+        private ICommand addAutoCommand;
+        public ICommand AddAutoCommand { get => addAutoCommand ?? (addAutoCommand = new RelayCommand(() => this.NewAuto())); }
+
+ 
         private IEventAggregator eventAggregator;
 
         public StammdatenViewModel(IEventAggregator eventAggregator)
@@ -60,10 +65,26 @@ namespace AutoReservation.GUI.ViewModels
             newKundeWindow.NewKundeCompleteEvent += NewKundeComplete;
             newKundeWindow.ShowView();
         }
+        private void NewAuto()
+        {
+            int newId = 0;
+            if (this.autoCollection.Count > 0)
+                newId = this.autoCollection.Max(k => k.Id) + 1;
+            var newAutoWindow = new NewAutoWindowViewModel(newId);
+            newAutoWindow.NewAutoCompleteEvent += NewAutoComplete;
+            newAutoWindow.ShowView();
+
+        }
+
+        private void NewAutoComplete(AutoDto newAuto)
+        {
+            this.autoCollection.Add(newAuto);
+            eventAggregator.GetEvent<AutoDataChangedEvent>().Publish(autoCollection);
+        }
 
         private void NewKundeComplete(KundeDto newKunde)
         {
-            this.KundenCollection.Add(newKunde);
+            this.kundenCollection.Add(newKunde);
             eventAggregator.GetEvent<KundenDataChangedEvent>().Publish(kundenCollection);
         }
     }

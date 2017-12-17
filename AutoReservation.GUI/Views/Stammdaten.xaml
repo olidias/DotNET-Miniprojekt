@@ -35,8 +35,8 @@
                 <TabItem Header="Autos">
                     <DockPanel Margin="5">
                         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="35">
+                            <Button x:Name="newCarBtn" Margin="5" Content="Auto hinzufügen" Command="{Binding AddAutoCommand}"/>
                             <Button x:Name="deleteCarBtn" Margin="5" Content="Auto löschen"/>
-                            <Button x:Name="newCarBtn" Margin="5" Content="Auto hinzufügen"/>
                             <Button x:Name="editCarBtn" Margin="5" Content="Auto ändern"/>
                         </StackPanel>
                         <ListView x:Name="carsListView" ItemsSource="{Binding AutoCollection}" VerticalAlignment="Stretch" Margin="5" HorizontalContentAlignment="Center">

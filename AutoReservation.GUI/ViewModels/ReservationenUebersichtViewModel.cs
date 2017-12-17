@@ -17,9 +17,9 @@ namespace AutoReservation.GUI.ViewModels
     public class ReservationenUebersichtViewModel
     {
         public ObservableCollection<ReservationDto> Reservations { get; set; }
-        ICommand newReservationCommand;
         private IEventAggregator eventAggregator;
 
+        ICommand newReservationCommand;
         public ICommand NewReservationCommand { get => newReservationCommand ?? (newReservationCommand = new RelayCommand(() => this.NewReservationDialog())); }
         public ObservableCollection<KundeDto> Kunden { get; private set; }
         public ObservableCollection<AutoDto> Autos { get; private set; }
@@ -66,9 +66,9 @@ namespace AutoReservation.GUI.ViewModels
             var kunde3 = new KundeDto() { Nachname = "High", Vorname = "Helfy" };
             Reservations = new ObservableCollection<ReservationDto>
             {
-                new ReservationDisplay { ReservationsNr = 12, Kunde=kunde1, Auto = new AutoDto(){Marke="Aston Martin" },Von=DateTime.Now.Date,Bis=DateTime.Now.AddDays(3).Date },
-                new ReservationDisplay { ReservationsNr = 13, Kunde=kunde2, Auto = new AutoDto(){Marke="Fiat Punto" },Von=DateTime.Now.Date,Bis=DateTime.Now.AddDays(4).Date },
-                new ReservationDisplay { ReservationsNr = 14, Kunde=kunde3, Auto = new AutoDto(){Marke="Maserati" },Von=DateTime.Now.AddDays(-5),Bis=DateTime.Now.AddDays(3).Date },
+                new ReservationDto { ReservationsNr = 12, Kunde=kunde1, Auto = new AutoDto(){Marke="Aston Martin" },Von=DateTime.Now.Date,Bis=DateTime.Now.AddDays(3).Date },
+                new ReservationDto { ReservationsNr = 13, Kunde=kunde2, Auto = new AutoDto(){Marke="Fiat Punto" },Von=DateTime.Now.Date,Bis=DateTime.Now.AddDays(4).Date },
+                new ReservationDto { ReservationsNr = 14, Kunde=kunde3, Auto = new AutoDto(){Marke="Maserati" },Von=DateTime.Now.AddDays(-5),Bis=DateTime.Now.AddDays(3).Date },
             };
         }
     }
