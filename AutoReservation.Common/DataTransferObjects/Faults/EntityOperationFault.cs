@@ -12,8 +12,11 @@ namespace AutoReservation.Common.DataTransferObjects.Faults
     [DataContract]
     public class EntityOperationFault
     {
+        [DataMember]
         public Type ErrorInputType { get; set; }
+        [DataMember]
         public ErrorOperation ErrorOperation { get; set; }
+        [DataMember]
         public int ErrorInputId { get; set; }
     }
 }

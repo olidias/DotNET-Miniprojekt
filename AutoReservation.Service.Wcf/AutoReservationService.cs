@@ -6,6 +6,7 @@ using AutoReservation.Common.DataTransferObjects.Faults;
 using System.Collections.Generic;
 using AutoReservation.BusinessLayer;
 using System.ServiceModel;
+using AutoReservation.BusinessLayer.Exceptions;
 
 namespace AutoReservation.Service.Wcf
 {
@@ -46,12 +47,39 @@ namespace AutoReservation.Service.Wcf
 
         public void DeleteKunde(int kundenId)
         {
-
+            WriteActualMethod();
+            try
+            {
+                this.kundeManager.RemoveKunde(kundenId);
+            }catch(Exception ex)
+            {
+                var e = new EntityOperationFault()
+                {
+                    ErrorInputType = typeof(KundeDto),
+                    ErrorInputId = kundenId,
+                    ErrorOperation = ErrorOperation.Delete
+                };
+                throw new FaultException<EntityOperationFault>(e, new FaultReason(ex.Message));
+            }
         }
 
         public void DeleteReservation(int reservationsNr)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            try
+            {
+                this.reservationManager.RemoveReservation(reservationsNr);
+            }
+            catch (Exception ex)
+            {
+                var e = new EntityOperationFault()
+                {
+                    ErrorInputType = typeof(ReservationDto),
+                    ErrorInputId = reservationsNr,
+                    ErrorOperation = ErrorOperation.Delete
+                };
+                throw new FaultException<EntityOperationFault>(e, new FaultReason(ex.Message));
+            }
         }
 
         public List<AutoDto> GetAllAutos()
@@ -177,7 +205,7 @@ namespace AutoReservation.Service.Wcf
                 {
                     ErrorInputType = typeof(AutoDto),
                     ErrorInputId = auto.Id,
-                    ErrorOperation = ErrorOperation.Delete
+                    ErrorOperation = ErrorOperation.Create
                 };
                 throw new FaultException<EntityOperationFault>(e, new FaultReason(ex.Message));
             }
@@ -185,32 +213,121 @@ namespace AutoReservation.Service.Wcf
 
         public void InsertKunde(KundeDto kunde)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            try
+            {
+                this.kundeManager.InsertKunde(kunde.ConvertToEntity());
+            }
+            catch (Exception ex)
+            {
+                var e = new EntityOperationFault()
+                {
+                    ErrorInputType = typeof(AutoDto),
+                    ErrorInputId = kunde.Id,
+                    ErrorOperation = ErrorOperation.Create
+                };
+                throw new FaultException<EntityOperationFault>(e, new FaultReason(ex.Message));
+            }
         }
 
         public void InsertReservation(ReservationDto reservation)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            if(!IsAutoAvailable(reservation.Auto, reservation.Von, reservation.Bis))
+            {
+                throw new FaultException<AutoUnavailableFault>(new AutoUnavailableFault(), new FaultReason("Auto is unavailable on these dates."));
+            }
+            try
+            {
+                this.reservationManager.InsertReservation(reservation.ConvertToEntity());
+            }
+            catch(InvalidDateRangeException ex)
+            {
+                throw new FaultException<InvalidDateRangeFault>(new InvalidDateRangeFault(), new FaultReason("Date range is not valid."));
+            }
+            catch(OverlappingTimesException ex)
+            {
+                var e = new OverlappingTimesFault();
+                throw new FaultException<OverlappingTimesFault>(e, new FaultReason("The times overlap: "+ ex.Message));
+            }
+            catch (Exception ex)
+            {
+                var e = new EntityOperationFault()
+                {
+                    ErrorInputType = typeof(AutoDto),
+                    ErrorInputId = reservation.ReservationsNr,
+                    ErrorOperation = ErrorOperation.Delete
+                };
+                throw new FaultException<EntityOperationFault>(e, new FaultReason(ex.Message));
+            }
         }
 
-        public bool IsAutoAvailable(AutoDto auto)
+        public bool IsAutoAvailable(AutoDto auto, DateTime von, DateTime bis)
         {
-            throw new NotImplementedException();
+            var currentAutoReservation = reservationManager.GetAllReservationen()
+                .FindAll(r=>r.AutoId == auto.Id)
+                .FindAll(r => r.Von.Date <= von.Date && r.Bis.Date >= bis.Date);
+
+            return currentAutoReservation.Count == 0;
         }
 
         public void UpdateAuto(AutoDto auto)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            try
+            {
+                autoManager.UpdateAuto(auto.ConvertToEntity());
+            }
+            catch(Exception ex)
+            {
+                var e = new EntityOperationFault()
+                {
+                    ErrorInputType = typeof(AutoDto),
+                    ErrorInputId = auto.Id,
+                    ErrorOperation = ErrorOperation.Update
+                };
+                throw new FaultException<EntityOperationFault>(e, new FaultReason(ex.Message));
+            }
         }
 
         public void UpdateKunde(KundeDto kunde)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            try
+            {
+                kundeManager.UpdateKunde(kunde.ConvertToEntity());
+            }
+            catch(Exception ex)
+            {
+                var e = new EntityOperationFault()
+                {
+                    ErrorInputType = typeof(KundeDto),
+                    ErrorInputId = kunde.Id,
+                    ErrorOperation = ErrorOperation.Update
+                };
+                throw new FaultException<EntityOperationFault>(e, new FaultReason(ex.Message));
+            }
         }
 
         public void UpdateReservation(ReservationDto reservation)
         {
-            throw new NotImplementedException();
+            WriteActualMethod();
+            if (!IsAutoAvailable(reservation.Auto, reservation.Von, reservation.Bis))
+            {
+                throw new FaultException<AutoUnavailableFault>(new AutoUnavailableFault(), "Auto not available on these dates");
+            }
+            try
+            {
+                reservationManager.UpdateReservation(reservation.ConvertToEntity());
+            }
+            catch(OverlappingTimesException ex)
+            {
+                throw new FaultException<OverlappingTimesFault>(new OverlappingTimesFault(), ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException<InvalidDateRangeFault>(new InvalidDateRangeFault(), new FaultReason(ex.Message));
+            }
         }
     }
 }

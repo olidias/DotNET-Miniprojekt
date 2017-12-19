@@ -1,4 +1,5 @@
 ﻿using AutoReservation.Common.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 
@@ -40,7 +41,7 @@ namespace AutoReservation.Common.Interfaces
         [OperationContract]
         void DeleteAuto(int autoId);
         [OperationContract]
-        bool IsAutoAvailable(AutoDto auto);
+        bool IsAutoAvailable(AutoDto auto, DateTime von, DateTime bis);
 
 
     }

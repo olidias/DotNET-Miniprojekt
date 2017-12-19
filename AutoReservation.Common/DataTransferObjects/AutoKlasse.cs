@@ -2,8 +2,14 @@
 
 namespace AutoReservation.Common.DataTransferObjects
 {
+    [DataContract]
     public enum AutoKlasse
     {
-        Luxusklasse, Mittelklasse, Standard
+        [EnumMember]
+        Luxusklasse,
+        [EnumMember]
+        Mittelklasse,
+        [EnumMember]
+        Standard
     }
 }

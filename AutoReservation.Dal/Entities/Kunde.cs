@@ -9,7 +9,7 @@ namespace AutoReservation.Dal.Entities
     [Table("Kunde")]
     public class Kunde
     {
-        [Key]
+        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required, MaxLength(20)]

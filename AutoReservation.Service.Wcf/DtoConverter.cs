@@ -104,6 +104,8 @@ namespace AutoReservation.Service.Wcf
         public static Reservation ConvertToEntity(this ReservationDto dto)
         {
             if (dto == null) { return null; }
+            var auto = dto.Auto.ConvertToEntity();
+            var kunde = dto.Kunde.ConvertToEntity();
 
             Reservation reservation = new Reservation
             {

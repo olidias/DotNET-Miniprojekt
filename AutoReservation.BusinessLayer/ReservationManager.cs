@@ -62,7 +62,10 @@ namespace AutoReservation.BusinessLayer
             {
                 var dbo = (from r in context.Reservationen
                            where r.ReservationsNr == target.ReservationsNr
-                           select r).FirstOrDefault();
+                           select r)
+                           .Include(p=>p.Auto)
+                           .Include(p=>p.Kunde)
+                           .FirstOrDefault();
 
                 CheckAvailability(context, target);
                 CheckRange(target);
@@ -74,11 +77,11 @@ namespace AutoReservation.BusinessLayer
                         throw CreateOptimisticConcurrencyException(context, target);
                     }
                     dbo.Kunde = target.Kunde;
-                    dbo.KundeId = target.KundeId;
                     dbo.Von = target.Von;
                     dbo.Bis = target.Bis;
                     dbo.Auto = target.Auto;
-                    dbo.AutoId = target.AutoId;
+                    context.Entry(dbo).State = EntityState.Modified;
+
                     context.SaveChanges();
                     return true;
                 }
@@ -119,12 +122,12 @@ namespace AutoReservation.BusinessLayer
             return !(res1.Von >= res2.Bis || res2.Bis <= res1.Von);
         }
 
-        public bool RemoveReservation(Reservation res)
+        public bool RemoveReservation(int resNr)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
                 var dbo = (from r in context.Reservationen
-                           where r.ReservationsNr == res.ReservationsNr
+                           where r.ReservationsNr == resNr
                            select r).FirstOrDefault();
                 if (dbo != null)
                 {

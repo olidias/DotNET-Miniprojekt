@@ -63,7 +63,7 @@ namespace AutoReservation.BusinessLayer.Testing
         {
             var totalKundenBefore = Target.GetAllKunden();
             var kunde = totalKundenBefore.Find(k=>k.Id==1);
-            Target.RemoveKunde(kunde);
+            Target.RemoveKunde(kunde.Id);
             var totalKundenAfter = Target.GetAllKunden();
 
             Assert.AreEqual(totalKundenBefore.Count - 1, totalKundenAfter.Count);

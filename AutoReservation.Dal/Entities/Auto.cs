@@ -8,6 +8,7 @@ namespace AutoReservation.Dal.Entities
     [Table("Auto")]
     public abstract class Auto
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required, MaxLength(20)]
         public string Marke { get; set; }

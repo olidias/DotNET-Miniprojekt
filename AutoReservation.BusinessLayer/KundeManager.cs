@@ -77,12 +77,12 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public bool RemoveKunde(Kunde target)
+        public bool RemoveKunde(int kundenId)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
                 var dbo = (from k in context.Kunden
-                           where k.Id == target.Id
+                           where k.Id == kundenId
                            select k).FirstOrDefault();
                 if (dbo != null)
                 {

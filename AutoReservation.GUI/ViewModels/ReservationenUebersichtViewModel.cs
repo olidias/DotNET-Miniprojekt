@@ -35,7 +35,6 @@ namespace AutoReservation.GUI.ViewModels
         public ICommand NewReservationCommand { get => newReservationCommand ?? (newReservationCommand = new RelayCommand(() => this.NewReservationDialog())); }
 
         private ICommand deleteReservationCommand;
-
         public ICommand DeleteReservationCommand { get => deleteReservationCommand ?? (deleteReservationCommand = new RelayCommand(() => this.DeleteReservation())); }
 
 
@@ -48,7 +47,9 @@ namespace AutoReservation.GUI.ViewModels
 
             this.eventAggregator.GetEvent<KundenDataChangedEvent>().Subscribe(this.KundenChanged);
             this.eventAggregator.GetEvent<AutoDataChangedEvent>().Subscribe(this.AutosChanged);
+
             InitTestData();
+
             this.reservationsCollection = new CollectionViewSource();
             this.reservationsCollection.Source = reservations;
             this.reservationsCollection.Filter += ShowCurrentReservations_Filter;

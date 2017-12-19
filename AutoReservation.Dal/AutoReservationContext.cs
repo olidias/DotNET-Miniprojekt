@@ -38,6 +38,8 @@ namespace AutoReservation.Dal
         {
             base.OnModelCreating(modelBuilder);
 
+
+
             modelBuilder.Entity<Auto>()
                 .HasMany(p => p.Reservationen);
 
